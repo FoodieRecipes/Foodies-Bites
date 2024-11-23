@@ -1,6 +1,8 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'package:flutter/material.dart';
 
-class FoodOrderPage extends StatefulWidget {
+class FoodOrderPage extends StatefulWidget { 
   const FoodOrderPage({super.key});
 
   @override
@@ -8,9 +10,7 @@ class FoodOrderPage extends StatefulWidget {
 }
 
 class _FoodOrderPageState extends State<FoodOrderPage> {
-  // List of food items
   final List<FoodItem> foodItems = [
-    FoodItem('Afang Soup', 'assets/images/afang.jpg', 3500.00),
     FoodItem('Atama Soup', 'assets/images/atama.jpg', 3000.00),
     FoodItem('Beans', 'assets/images/beans.jpg', 1500.49),
     FoodItem('Chinese Rice', 'assets/images/chinese rice.jpg', 4500.00),

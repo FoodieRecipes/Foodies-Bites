@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodiesbites/features/Others/other_page.dart';
+import 'package:foodiesbites/features/others/other_page.dart';
 import 'package:foodiesbites/generated/customer_care/customer_care.dart';
 
 class Settings extends StatelessWidget{

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodiesbites/features/home/home.dart';
-import 'package:foodiesbites/features/Others/other_page.dart';
+import 'package:foodiesbites/features/others/other_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -17,16 +17,14 @@ class _BottomNavBarAllState extends State<BottomNavBarAll> {
 
   final List<Widget> _screens = [
     const MyHomePage(),
-    const ChatPage(),
-    const CallPage(),
-    const NotificationDetailPage(),
+    const ChatPage(message: null,),
+    CallPage(),
+    NotificationDetailPage(),
     
   ];
 
   @override
   void initState()  {
-    // TODO: implement initState
-    // setStatus();
     super.initState();
 
   }
