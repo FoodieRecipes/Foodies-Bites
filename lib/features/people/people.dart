@@ -1,37 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:foodiesbites/features/others/other_page.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
+import 'dart:math' as math;
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class Profile extends StatelessWidget {
+  final String avatar = 'assets/images/avatar.jpg';
 
   @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-
-  String avatar = 'assets/images/avatar.jpg';
-
-   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile', style: TextStyle(fontSize: 20, color: Color(0xFF034904),
-                  fontWeight: FontWeight.w600,),),),
+      appBar: AppBar(
+        title: const Text(
+          'Profile',
+          style: TextStyle(
+            fontSize: 20,
+            color: Color(0xFF034904),
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Profile Picture and Edit Button
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage(avatar),
+            // Profile Picture with Hero Animation
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RadialExpansionDemo(imageName: avatar),
+                  ),
+                );
+              },
+              child: Hero(
+                tag: avatar,
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage(avatar),
+                ),
+              ),
             ),
             const SizedBox(height: 12),
 
             // Name
             const Text(
-              'Akpan Henry ',
+              'Akpan Henry',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -71,7 +85,7 @@ class _ProfileState extends State<Profile> {
                     // Follow button action
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF034904), 
+                    backgroundColor: const Color(0xFF034904),
                   ),
                   child: const Text(
                     'Follow',
@@ -81,9 +95,7 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(width: 8),
                 OutlinedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>  const ChatPage(message: null,)) 
-                    );
+                    // Message button action
                   },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: Colors.grey.shade400),
@@ -145,6 +157,105 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class RadialExpansionDemo extends StatelessWidget {
+  static const double kMinRadius = 32.0;
+  static const double kMaxRadius = 128.0;
+  static const opacityCurve = Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
+
+  final String imageName;
+
+  const RadialExpansionDemo({super.key, required this.imageName});
+
+  static RectTween _createRectTween(Rect? begin, Rect? end) {
+    return MaterialRectCenterArcTween(begin: begin, end: end);
+  }
+
+  Widget _buildHero(BuildContext context, String imageName, String description) {
+    return SizedBox(
+      width: kMinRadius * 3.0,
+      height: kMinRadius * 3.0,
+      child: Hero(
+        createRectTween: _createRectTween,
+        tag: imageName,
+        child: RadialExpansion(
+          maxRadius: kMaxRadius,
+          child: Photo(
+            photo: imageName,
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    timeDilation = 4.0; // Animation speed.
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile Info'),
+        backgroundColor: Colors.green,
+      ),
+      body:  Center(
+          child: Container(
+            child: Image.asset(imageName,
+            fit: BoxFit.cover,)
+        ),
+      ),
+    );
+  }
+}
+
+class RadialExpansion extends StatelessWidget {
+  const RadialExpansion({
+    super.key,
+    required this.maxRadius,
+    required this.child,
+  }) : clipRectSize = 2.0 * (maxRadius / math.sqrt2);
+
+  final double maxRadius;
+  final double clipRectSize;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Center(
+        child: SizedBox(
+          width: clipRectSize,
+          height: clipRectSize,
+          child: ClipRect(
+            child: child,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Photo extends StatelessWidget {
+  const Photo({super.key, required this.photo, this.onTap});
+
+  final String photo;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: InkWell(
+        onTap: onTap,
+        child: Image.asset(
+          photo,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

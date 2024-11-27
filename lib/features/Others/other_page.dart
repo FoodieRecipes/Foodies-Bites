@@ -13,25 +13,25 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final List<User> _users = [
     User(
-      name: 'John Doe',
+      name: 'Akpan Joy',
       avatar: 'https://i.pravatar.cc/150?img=3',
       lastMessage: 'Hey, how are you doing?',
       lastMessageTime: '2:30 PM',
     ),
     User(
-      name: 'Jane Smith',
+      name: 'Miracle Biance',
       avatar: 'https://i.pravatar.cc/150?img=5',
       lastMessage: 'Don’t forget the meeting tomorrow.',
       lastMessageTime: '1:15 PM',
     ),
     User(
-      name: 'Michael Brown',
+      name: 'Micheal Effiong',
       avatar: 'https://i.pravatar.cc/150?img=8',
       lastMessage: 'Happy birthday! 🎉',
       lastMessageTime: '12:00 PM',
     ),
     User(
-      name: 'Sarah Lee',
+      name: 'Smith Bassey',
       avatar: 'https://i.pravatar.cc/150?img=9',
       lastMessage: 'Can we catch up later?',
       lastMessageTime: '10:45 AM',
@@ -620,45 +620,6 @@ class GetVerified extends StatelessWidget {
     );
   }
 }
-class LogOut extends StatelessWidget {
-  const LogOut({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign Out Account'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Are you sure you want to sign out?', 
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color:  Color(0xFF034904),),),
-            const SizedBox(height: 20),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignInScreen()),
-                );
-              },
-              child: const Text(
-                'Click here to Log Out',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 
 
@@ -808,3 +769,113 @@ class KeyboardAwareBottomSheet extends StatelessWidget {
 }
 
 
+class LogoutDialog extends StatelessWidget {
+  final VoidCallback onConfirmLogout;
+
+  LogoutDialog({super.key, required this.onConfirmLogout});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text(
+        'Sign Out',
+        style: TextStyle(fontWeight: FontWeight.bold, color:Color(0xFF034904)),
+      ),
+      content: const Text('Are you sure you want to Sign Out?', style: TextStyle(fontWeight: FontWeight.w400, color:Color(0xFF034904))),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(); // Close the dialog
+          },
+          child: const Text(
+            'Cancel',
+            style: TextStyle(fontWeight: FontWeight.w500, color:Color(0xFF034904)),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop(); // Close the dialog
+            onConfirmLogout(); 
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SignInScreen()),
+            ); 
+          },
+          child: const Text('Yes', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+        ),
+      ],
+    );
+  }
+}
+
+// Usage Example
+void showLogoutDialog(BuildContext context, VoidCallback onConfirmLogout) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return LogoutDialog(onConfirmLogout: onConfirmLogout);
+    },
+  );
+}
+
+
+class LogOut extends StatelessWidget {
+  const LogOut({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('LogOut', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24, color:Color(0xFF034904)))),
+         body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                 const Text(
+                'Thank you for choosing us...',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  color:Color(0xFF034904)
+                ),
+              ),
+              const SizedBox(height: 40),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  'assets/images/food1.jpg', 
+                  width: 300,
+                  height: 300,
+                  fit: BoxFit.cover, 
+                ),
+              ),
+              const SizedBox(height: 40), 
+              // ElevatedButton
+              ElevatedButton(
+                onPressed: () {
+                  showLogoutDialog(
+                    context,
+                    () {
+                      print("User logged out!"); // Replace with your logout logic
+                    },
+                  );
+                },
+                 style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF034904), // Button background color
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Button padding
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20), // Rounded corners
+                  ),
+                ),
+                child: const Text(
+                  'Click Here to Sign Out',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

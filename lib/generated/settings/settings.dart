@@ -14,15 +14,15 @@ class Settings extends StatelessWidget{
       title: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Center(child: Text('Settings')),
+          const Center(child: Text('Settings', style:TextStyle(fontSize:24, fontWeight: FontWeight.w600, color: Color(0xFF034904)))),
           InkWell(
             onTap: () {},
             child: Container(
               margin: const EdgeInsets.all(8.0),
               padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 103, 104, 104),
-                borderRadius: BorderRadius.circular(12.0),
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
               ),
               child: const Row(
                 children: [
@@ -51,8 +51,8 @@ class Settings extends StatelessWidget{
               child: Container(
                 padding: const EdgeInsets.all(14.5),
                 decoration: BoxDecoration(
-                  color: Colors.grey[800], 
-                  borderRadius: BorderRadius.circular(12.0), 
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(14.0), 
                 ),
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,8 +92,8 @@ class Settings extends StatelessWidget{
               child: Container(
                padding: const EdgeInsets.all(16.0),
                decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(12.0),
+                color:  Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
                 ),
                child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,8 +133,8 @@ class Settings extends StatelessWidget{
               child: Container(
                padding: const EdgeInsets.all(16.0),
                decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(12.0),
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
                 ),
                child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,8 +173,8 @@ class Settings extends StatelessWidget{
               child: Container(
                padding: const EdgeInsets.all(16.0),
                decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(12.0),
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
                 ),
                child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,8 +213,8 @@ class Settings extends StatelessWidget{
               child: Container(
                padding: const EdgeInsets.all(16.0),
                decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(12.0),
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
                 ),
                child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,8 +258,8 @@ class Settings extends StatelessWidget{
               child: Container(
                padding: const EdgeInsets.all(16.0),
                decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(12.0),
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
                 ),
                child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,8 +302,8 @@ class Settings extends StatelessWidget{
               child: Container(
                padding: const EdgeInsets.all(16.0),
                decoration: BoxDecoration(
-                color: Colors.grey[800],
-                borderRadius: BorderRadius.circular(12.0),
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(14.0),
                 ),
                child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
